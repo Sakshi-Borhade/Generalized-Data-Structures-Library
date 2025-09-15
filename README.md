@@ -2,7 +2,9 @@
 Generalised Data Structures Library
 --------------------------------------------------------
 ProjectName : Created self data structures.
+
 Technology: C++ Programming
+
 Author: Sakshi Pankaj Borhade
 
 Project Overview
