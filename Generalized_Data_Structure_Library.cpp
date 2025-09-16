@@ -423,6 +423,40 @@ class SinglyCLL
         void Display();
 
         int Count();
+
+        int SearchFirstOcc(
+                                T no
+                            );
+
+        int SearchLastOcc(
+                                T no
+                            );
+
+        int Addition();
+
+        int Maximum();
+
+        int Minimum();
+
+        void DisplayPerfect();
+
+        void DisplayPrime();
+
+        int AddEven();
+
+        int SecMaximum();
+
+        void SumDigit();
+
+        void Reverse();
+
+        void DisplayPalindrome();
+
+        void DisplayProduct();
+
+        void DisplaySmall();
+
+        void DisplayLargest();
     
         void InsertAtPos(
                             T no, 
@@ -704,6 +738,593 @@ int SinglyCLL<T> :: Count()
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //
+//	Function Name			:	SearchFirstOcc
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		[In] T no.
+//      Holds the value that you want to search.
+//
+//	Description:
+//		This function is used to search the first occurance of the element in the linked list.
+//
+//	Returns:
+//		Returns the number of first occurance in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyCLL<T> ::  SearchFirstOcc(
+                                        T no
+                                    )
+{
+    int iCount = 1;
+
+    while(first != NULL)
+    {
+        if(first->data == no)
+        {
+            return iCount;
+        }
+        first = first->next;
+        iCount++;
+    }
+    return iCount;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SearchLastOcc
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		[In] T no.
+//      Holds the value that you want to search.
+//
+//	Description:
+//		This function is used to search the Last occurance of the element in the linked list.
+//
+//	Returns:
+//		Returns the number of Last occurance in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyCLL<T> :: SearchLastOcc(
+                                    T no
+                                )
+{
+    int iCount = 1, LastPos = 0;
+
+    while(first != NULL)
+    {
+        if(first->data == no)
+        {
+            LastPos = iCount;
+        }
+        first = first->next;
+        iCount++;
+    }
+    return LastPos;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Addition
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Add the elements in the linked list.
+//
+//	Returns:
+//		Returns the Addition of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyCLL<T> :: Addition()
+{
+    int iSum = 0;
+
+    while(first != NULL)
+    {
+        iSum = iSum + (first->data);
+        first = first->next;
+    }
+    return iSum;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Maximum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the maximum element in the linked list.
+//
+//	Returns:
+//		Returns the Maximum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyCLL<T> :: Maximum()
+{
+    int iMax = 0;
+
+    iMax = first->data;
+
+    while(first != NULL)
+    {
+        if(iMax < first->data)
+        {
+            iMax = first->data;
+        }
+        first = first->next;
+    }
+    return iMax;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Minimum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Minimum element in the linked list.
+//
+//	Returns:
+//		Returns the Minimum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyCLL<T> :: Minimum()
+{
+    int iMin = 0;
+
+    iMin = first->data;
+
+    while(first != NULL)
+    {
+        if(iMin > first->data)
+        {
+            iMin = first->data;
+        }
+        first = first->next;
+    }
+    return iMin;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPerfect
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Perfect element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyCLL<T> :: DisplayPerfect()
+{
+    int iSum = 0, iCnt = 0;
+
+    while(first != NULL)
+    {
+        iSum = 0;
+
+        for(iCnt = 2; iCnt <= (first->data)/2; iCnt++)
+        {
+            if(((first->data) % iCnt) == 0)
+            {
+                iSum = iSum + iCnt;
+            }
+        }
+
+        if(iSum == (first->data))
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPrime
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Prime element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyCLL<T> :: DisplayPrime()
+{
+    int iFlag = 0, iCnt = 0;
+
+    while(first != NULL)
+    {
+        iFlag = 1;
+
+        if((first->data) < 2)
+        {
+            iFlag = 0;
+        }
+        else
+        {
+            for(iCnt = 2; iCnt <= (first->data)/2; iCnt++)
+            {
+                if(((first->data) % iCnt) == 0)
+                {
+                    iFlag = 0;
+                    break;
+                }
+            }
+        }
+
+        if(iFlag == 1)
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	AddEven
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Add the Even numbers present in the linked list.
+//
+//	Returns:
+//		Returns the Addition of the even number of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyCLL<T> :: AddEven()
+{
+    int iSum = 0;
+
+    while(first != NULL)
+    {
+        if(((first->data) % 2) == 0)
+        {
+            iSum = iSum + (first->data);
+        }
+
+        first = first->next;
+    }
+    return iSum;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SecMaximum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Secmaximum element in the linked list.
+//
+//	Returns:
+//		Returns the SecMaximum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyCLL<T> :: SecMaximum()
+{
+    int iMax1 = 0, iMax2 = 0;
+
+    while(first != NULL)
+    {
+        if(iMax1 < first->data)
+        {
+            iMax2 = iMax1;
+            iMax1 = first->data;
+        }
+        else if(((first->data) > iMax2) && ((first->data) != iMax1))
+        {
+            iMax2 = first->data;
+        }
+        first = first->next;
+    }
+    return iMax2;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SumDigit
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Sum the Digits of each element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyCLL<T> :: SumDigit()
+{
+    int iSum = 0, iDigit = 0;
+
+    while(first != NULL)
+    {
+        iSum = 0;
+
+        while((first->data) != 0)
+        {
+            iDigit = ((first->data) % 10);
+            iSum = iSum + iDigit;
+            first->data = ((first->data) /10); 
+        }
+
+        printf("%d\t",iSum);
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Reverse
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Reverse the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyCLL<T> :: Reverse()
+{
+    int Rev = 0, iDigit = 0;
+
+    while(first != NULL)
+    {
+        Rev = 0;
+
+        while((first->data) != 0)
+        {
+            iDigit = ((first->data) % 10);
+            Rev = (Rev * 10) + ((first->data) % 10);
+            first->data = ((first->data) / 10);
+        }
+
+        printf("%d\t",Rev);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPalindrome
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display the Palindrome elements in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyCLL<T> :: DisplayPalindrome()
+{
+    int Rev = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        Rev = 0;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            Rev = (Rev * 10) + (temp % 10);
+            temp = (temp / 10);
+        }
+
+        if(Rev == (first->data))
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayProduct
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display the product of elements in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyCLL<T> :: DisplayProduct()
+{
+    int iMulti = 1, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMulti = 1;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+
+            if(iDigit != 0)
+            {
+                iMulti = iMulti * iDigit;
+            }
+            temp = temp / 10;
+        }
+
+        printf("%d\t",iMulti);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplaySmall
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display Small element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyCLL<T> :: DisplaySmall()
+{
+    int iMin = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMin = 9;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            if(iDigit < iMin)
+            {
+                iMin = iDigit;
+            }
+            temp = (temp / 10);
+        }
+
+        printf("%d\t",iMin);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayLargest
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display Largest element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyCLL<T> :: DisplayLargest()
+{
+    int iMax = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMax = 0;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            if(iDigit > iMax)
+            {
+                iMax = iDigit;
+            }
+            temp = (temp / 10);
+        }
+
+        printf("%d\t",iMax);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
 //	Function Name			:	InsertAtPos
 //	Function Date			:	15/09/2025
 //	Function Author		    :	Sakshi Pankaj Borhade
@@ -855,15 +1476,63 @@ class DoublyCLL
         DoublyCLL();
 
         void Display();
+
         int Count();
 
-        void InsertFirst(T);
-        void InsertLast(T);
+        void InsertFirst(
+                            T
+                        );
+
+        void InsertLast(
+                            T
+                        );
+
+        int SearchFirstOcc(
+                                T no
+                            );
+
+        int SearchLastOcc(
+                                T no
+                            );
+
+        int Addition();
+
+        int Maximum();
+
+        int Minimum();
+
+        void DisplayPerfect();
+
+        void DisplayPrime();
+
+        int AddEven();
+
+        int SecMaximum();
+
+        void SumDigit();
+
+        void Reverse();
+
+        void DisplayPalindrome();
+
+        void DisplayProduct();
+
+        void DisplaySmall();
+
+        void DisplayLargest();
+
         void DeleteFirst();
+
         void DeleteLast();
 
-        void InsertAtPos(T, int);
-        void DeleteAtPos(int);
+        void InsertAtPos(
+                            T, 
+                            int
+                        );
+
+        void DeleteAtPos(
+                            int
+                        );
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1046,6 +1715,593 @@ template <class T>
 int DoublyCLL<T> :: Count()
 {
     return iCount;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SearchFirstOcc
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		[In] T no.
+//      Holds the value that you want to search.
+//
+//	Description:
+//		This function is used to search the first occurance of the element in the linked list.
+//
+//	Returns:
+//		Returns the number of first occurance in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyCLL<T> ::  SearchFirstOcc(
+                                        T no
+                                    )
+{
+    int iCount = 1;
+
+    while(first != NULL)
+    {
+        if(first->data == no)
+        {
+            return iCount;
+        }
+        first = first->next;
+        iCount++;
+    }
+    return iCount;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SearchLastOcc
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		[In] T no.
+//      Holds the value that you want to search.
+//
+//	Description:
+//		This function is used to search the Last occurance of the element in the linked list.
+//
+//	Returns:
+//		Returns the number of Last occurance in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyCLL<T> :: SearchLastOcc(
+                                    T no
+                                )
+{
+    int iCount = 1, LastPos = 0;
+
+    while(first != NULL)
+    {
+        if(first->data == no)
+        {
+            LastPos = iCount;
+        }
+        first = first->next;
+        iCount++;
+    }
+    return LastPos;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Addition
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Add the elements in the linked list.
+//
+//	Returns:
+//		Returns the Addition of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyCLL<T> :: Addition()
+{
+    int iSum = 0;
+
+    while(first != NULL)
+    {
+        iSum = iSum + (first->data);
+        first = first->next;
+    }
+    return iSum;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Maximum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the maximum element in the linked list.
+//
+//	Returns:
+//		Returns the Maximum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyCLL<T> :: Maximum()
+{
+    int iMax = 0;
+
+    iMax = first->data;
+
+    while(first != NULL)
+    {
+        if(iMax < first->data)
+        {
+            iMax = first->data;
+        }
+        first = first->next;
+    }
+    return iMax;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Minimum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Minimum element in the linked list.
+//
+//	Returns:
+//		Returns the Minimum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyCLL<T> :: Minimum()
+{
+    int iMin = 0;
+
+    iMin = first->data;
+
+    while(first != NULL)
+    {
+        if(iMin > first->data)
+        {
+            iMin = first->data;
+        }
+        first = first->next;
+    }
+    return iMin;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPerfect
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Perfect element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyCLL<T> :: DisplayPerfect()
+{
+    int iSum = 0, iCnt = 0;
+
+    while(first != NULL)
+    {
+        iSum = 0;
+
+        for(iCnt = 2; iCnt <= (first->data)/2; iCnt++)
+        {
+            if(((first->data) % iCnt) == 0)
+            {
+                iSum = iSum + iCnt;
+            }
+        }
+
+        if(iSum == (first->data))
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPrime
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Prime element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyCLL<T> :: DisplayPrime()
+{
+    int iFlag = 0, iCnt = 0;
+
+    while(first != NULL)
+    {
+        iFlag = 1;
+
+        if((first->data) < 2)
+        {
+            iFlag = 0;
+        }
+        else
+        {
+            for(iCnt = 2; iCnt <= (first->data)/2; iCnt++)
+            {
+                if(((first->data) % iCnt) == 0)
+                {
+                    iFlag = 0;
+                    break;
+                }
+            }
+        }
+
+        if(iFlag == 1)
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	AddEven
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Add the Even numbers present in the linked list.
+//
+//	Returns:
+//		Returns the Addition of the even number of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyCLL<T> :: AddEven()
+{
+    int iSum = 0;
+
+    while(first != NULL)
+    {
+        if(((first->data) % 2) == 0)
+        {
+            iSum = iSum + (first->data);
+        }
+
+        first = first->next;
+    }
+    return iSum;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SecMaximum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Secmaximum element in the linked list.
+//
+//	Returns:
+//		Returns the SecMaximum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyCLL<T> :: SecMaximum()
+{
+    int iMax1 = 0, iMax2 = 0;
+
+    while(first != NULL)
+    {
+        if(iMax1 < first->data)
+        {
+            iMax2 = iMax1;
+            iMax1 = first->data;
+        }
+        else if(((first->data) > iMax2) && ((first->data) != iMax1))
+        {
+            iMax2 = first->data;
+        }
+        first = first->next;
+    }
+    return iMax2;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SumDigit
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Sum the Digits of each element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyCLL<T> :: SumDigit()
+{
+    int iSum = 0, iDigit = 0;
+
+    while(first != NULL)
+    {
+        iSum = 0;
+
+        while((first->data) != 0)
+        {
+            iDigit = ((first->data) % 10);
+            iSum = iSum + iDigit;
+            first->data = ((first->data) /10); 
+        }
+
+        printf("%d\t",iSum);
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Reverse
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Reverse the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyCLL<T> :: Reverse()
+{
+    int Rev = 0, iDigit = 0;
+
+    while(first != NULL)
+    {
+        Rev = 0;
+
+        while((first->data) != 0)
+        {
+            iDigit = ((first->data) % 10);
+            Rev = (Rev * 10) + ((first->data) % 10);
+            first->data = ((first->data) / 10);
+        }
+
+        printf("%d\t",Rev);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPalindrome
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display the Palindrome elements in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyCLL<T> :: DisplayPalindrome()
+{
+    int Rev = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        Rev = 0;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            Rev = (Rev * 10) + (temp % 10);
+            temp = (temp / 10);
+        }
+
+        if(Rev == (first->data))
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayProduct
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display the product of elements in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyCLL<T> :: DisplayProduct()
+{
+    int iMulti = 1, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMulti = 1;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+
+            if(iDigit != 0)
+            {
+                iMulti = iMulti * iDigit;
+            }
+            temp = temp / 10;
+        }
+
+        printf("%d\t",iMulti);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplaySmall
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display Small element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyCLL<T> :: DisplaySmall()
+{
+    int iMin = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMin = 9;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            if(iDigit < iMin)
+            {
+                iMin = iDigit;
+            }
+            temp = (temp / 10);
+        }
+
+        printf("%d\t",iMin);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayLargest
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display Largest element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyCLL<T> :: DisplayLargest()
+{
+    int iMax = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMax = 0;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            if(iDigit > iMax)
+            {
+                iMax = iDigit;
+            }
+            temp = (temp / 10);
+        }
+
+        printf("%d\t",iMax);
+        first = first->next;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1286,6 +2542,41 @@ class SinglyLLL
 
         void Display();
 
+        int Count();
+
+        int SearchFirstOcc(
+                                T no
+                            );
+
+        int SearchLastOcc(
+                                T no
+                            );
+        int Addition();
+
+        int Maximum();
+
+        int Minimum();
+
+        void DisplayPerfect();
+
+        void DisplayPrime();
+
+        int AddEven();
+
+        int SecMaximum();
+
+        void SumDigit();
+
+        void Reverse();
+
+        void DisplayPalindrome();
+
+        void DisplayProduct();
+
+        void DisplaySmall();
+
+        void DisplayLargest();
+
         void InsertLast(
                             T no
                         );
@@ -1393,6 +2684,616 @@ void SinglyLLL<T> :: Display()
         temp = temp -> next;
     }
     cout<<"NULL\n";
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Count
+//	Function Date			:	15/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to count the elemnts from the linked list.
+//
+//	Returns:
+//		Count of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyLLL<T> :: Count()
+{
+    return iCount;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SearchFirstOcc
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		[In] T no.
+//      Holds the value that you want to search.
+//
+//	Description:
+//		This function is used to search the first occurance of the element in the linked list.
+//
+//	Returns:
+//		Returns the number of first occurance in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyLLL<T> ::  SearchFirstOcc(
+                                        T no
+                                    )
+{
+    int iCount = 1;
+
+    while(first != NULL)
+    {
+        if(first->data == no)
+        {
+            return iCount;
+        }
+        first = first->next;
+        iCount++;
+    }
+    return iCount;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SearchLastOcc
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		[In] T no.
+//      Holds the value that you want to search.
+//
+//	Description:
+//		This function is used to search the Last occurance of the element in the linked list.
+//
+//	Returns:
+//		Returns the number of Last occurance in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyLLL<T> :: SearchLastOcc(
+                                    T no
+                                )
+{
+    int iCount = 1, LastPos = 0;
+
+    while(first != NULL)
+    {
+        if(first->data == no)
+        {
+            LastPos = iCount;
+        }
+        first = first->next;
+        iCount++;
+    }
+    return LastPos;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Addition
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Add the elements in the linked list.
+//
+//	Returns:
+//		Returns the Addition of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyLLL<T> :: Addition()
+{
+    int iSum = 0;
+
+    while(first != NULL)
+    {
+        iSum = iSum + (first->data);
+        first = first->next;
+    }
+    return iSum;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Maximum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the maximum element in the linked list.
+//
+//	Returns:
+//		Returns the Maximum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyLLL<T> :: Maximum()
+{
+    int iMax = 0;
+
+    iMax = first->data;
+
+    while(first != NULL)
+    {
+        if(iMax < first->data)
+        {
+            iMax = first->data;
+        }
+        first = first->next;
+    }
+    return iMax;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Minimum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Minimum element in the linked list.
+//
+//	Returns:
+//		Returns the Minimum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyLLL<T> :: Minimum()
+{
+    int iMin = 0;
+
+    iMin = first->data;
+
+    while(first != NULL)
+    {
+        if(iMin > first->data)
+        {
+            iMin = first->data;
+        }
+        first = first->next;
+    }
+    return iMin;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPerfect
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Perfect element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyLLL<T> :: DisplayPerfect()
+{
+    int iSum = 0, iCnt = 0;
+
+    while(first != NULL)
+    {
+        iSum = 0;
+
+        for(iCnt = 2; iCnt <= (first->data)/2; iCnt++)
+        {
+            if(((first->data) % iCnt) == 0)
+            {
+                iSum = iSum + iCnt;
+            }
+        }
+
+        if(iSum == (first->data))
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPrime
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Prime element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyLLL<T> :: DisplayPrime()
+{
+    int iFlag = 0, iCnt = 0;
+
+    while(first != NULL)
+    {
+        iFlag = 1;
+
+        if((first->data) < 2)
+        {
+            iFlag = 0;
+        }
+        else
+        {
+            for(iCnt = 2; iCnt <= (first->data)/2; iCnt++)
+            {
+                if(((first->data) % iCnt) == 0)
+                {
+                    iFlag = 0;
+                    break;
+                }
+            }
+        }
+
+        if(iFlag == 1)
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	AddEven
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Add the Even numbers present in the linked list.
+//
+//	Returns:
+//		Returns the Addition of the even number of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyLLL<T> :: AddEven()
+{
+    int iSum = 0;
+
+    while(first != NULL)
+    {
+        if(((first->data) % 2) == 0)
+        {
+            iSum = iSum + (first->data);
+        }
+
+        first = first->next;
+    }
+    return iSum;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SecMaximum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Secmaximum element in the linked list.
+//
+//	Returns:
+//		Returns the SecMaximum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int SinglyLLL<T> :: SecMaximum()
+{
+    int iMax1 = 0, iMax2 = 0;
+
+    while(first != NULL)
+    {
+        if(iMax1 < first->data)
+        {
+            iMax2 = iMax1;
+            iMax1 = first->data;
+        }
+        else if(((first->data) > iMax2) && ((first->data) != iMax1))
+        {
+            iMax2 = first->data;
+        }
+        first = first->next;
+    }
+    return iMax2;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SumDigit
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Sum the Digits of each element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyLLL<T> :: SumDigit()
+{
+    int iSum = 0, iDigit = 0;
+
+    while(first != NULL)
+    {
+        iSum = 0;
+
+        while((first->data) != 0)
+        {
+            iDigit = ((first->data) % 10);
+            iSum = iSum + iDigit;
+            first->data = ((first->data) /10); 
+        }
+
+        printf("%d\t",iSum);
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Reverse
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Reverse the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyLLL<T> :: Reverse()
+{
+    int Rev = 0, iDigit = 0;
+
+    while(first != NULL)
+    {
+        Rev = 0;
+
+        while((first->data) != 0)
+        {
+            iDigit = ((first->data) % 10);
+            Rev = (Rev * 10) + ((first->data) % 10);
+            first->data = ((first->data) / 10);
+        }
+
+        printf("%d\t",Rev);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPalindrome
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display the Palindrome elements in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyLLL<T> :: DisplayPalindrome()
+{
+    int Rev = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        Rev = 0;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            Rev = (Rev * 10) + (temp % 10);
+            temp = (temp / 10);
+        }
+
+        if(Rev == (first->data))
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayProduct
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display the product of elements in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyLLL<T> :: DisplayProduct()
+{
+    int iMulti = 1, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMulti = 1;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+
+            if(iDigit != 0)
+            {
+                iMulti = iMulti * iDigit;
+            }
+            temp = temp / 10;
+        }
+
+        printf("%d\t",iMulti);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplaySmall
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display Small element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyLLL<T> :: DisplaySmall()
+{
+    int iMin = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMin = 9;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            if(iDigit < iMin)
+            {
+                iMin = iDigit;
+            }
+            temp = (temp / 10);
+        }
+
+        printf("%d\t",iMin);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayLargest
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display Largest element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void SinglyLLL<T> :: DisplayLargest()
+{
+    int iMax = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMax = 0;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            if(iDigit > iMax)
+            {
+                iMax = iDigit;
+            }
+            temp = (temp / 10);
+        }
+
+        printf("%d\t",iMax);
+        first = first->next;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1686,6 +3587,41 @@ class DoublyLLL
 
         void Display();
 
+        int Count();
+
+        int SearchFirstOcc(
+                                T no
+                            );
+
+        int SearchLastOcc(
+                                T no
+                            );
+        int Addition();
+
+        int Maximum();
+
+        int Minimum();
+
+        void DisplayPerfect();
+
+        void DisplayPrime();
+
+        int AddEven();
+
+        int SecMaximum();
+
+        void SumDigit();
+
+        void Reverse();
+
+        void DisplayPalindrome();
+
+        void DisplayProduct();
+
+        void DisplaySmall();
+
+        void DisplayLargest();
+
         void InsertLast(
                             T no
                         );
@@ -1794,6 +3730,616 @@ void DoublyLLL<T> ::  Display()
         first = first->next;
     }
     cout<<"NULL\n";
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Count
+//	Function Date			:	15/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to count the elemnts from the linked list.
+//
+//	Returns:
+//		Count of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyLLL<T> :: Count()
+{
+    return iCount;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SearchFirstOcc
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		[In] T no.
+//      Holds the value that you want to search.
+//
+//	Description:
+//		This function is used to search the first occurance of the element in the linked list.
+//
+//	Returns:
+//		Returns the number of first occurance in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyLLL<T> ::  SearchFirstOcc(
+                                        T no
+                                    )
+{
+    int iCount = 1;
+
+    while(first != NULL)
+    {
+        if(first->data == no)
+        {
+            return iCount;
+        }
+        first = first->next;
+        iCount++;
+    }
+    return iCount;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SearchLastOcc
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		[In] T no.
+//      Holds the value that you want to search.
+//
+//	Description:
+//		This function is used to search the Last occurance of the element in the linked list.
+//
+//	Returns:
+//		Returns the number of Last occurance in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyLLL<T> :: SearchLastOcc(
+                                    T no
+                                )
+{
+    int iCount = 1, LastPos = 0;
+
+    while(first != NULL)
+    {
+        if(first->data == no)
+        {
+            LastPos = iCount;
+        }
+        first = first->next;
+        iCount++;
+    }
+    return LastPos;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Addition
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Add the elements in the linked list.
+//
+//	Returns:
+//		Returns the Addition of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyLLL<T> :: Addition()
+{
+    int iSum = 0;
+
+    while(first != NULL)
+    {
+        iSum = iSum + (first->data);
+        first = first->next;
+    }
+    return iSum;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Maximum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the maximum element in the linked list.
+//
+//	Returns:
+//		Returns the Maximum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyLLL<T> :: Maximum()
+{
+    int iMax = 0;
+
+    iMax = first->data;
+
+    while(first != NULL)
+    {
+        if(iMax < first->data)
+        {
+            iMax = first->data;
+        }
+        first = first->next;
+    }
+    return iMax;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Minimum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Minimum element in the linked list.
+//
+//	Returns:
+//		Returns the Minimum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyLLL<T> :: Minimum()
+{
+    int iMin = 0;
+
+    iMin = first->data;
+
+    while(first != NULL)
+    {
+        if(iMin > first->data)
+        {
+            iMin = first->data;
+        }
+        first = first->next;
+    }
+    return iMin;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPerfect
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Perfect element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyLLL<T> :: DisplayPerfect()
+{
+    int iSum = 0, iCnt = 0;
+
+    while(first != NULL)
+    {
+        iSum = 0;
+
+        for(iCnt = 2; iCnt <= (first->data)/2; iCnt++)
+        {
+            if(((first->data) % iCnt) == 0)
+            {
+                iSum = iSum + iCnt;
+            }
+        }
+
+        if(iSum == (first->data))
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPrime
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Prime element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyLLL<T> :: DisplayPrime()
+{
+    int iFlag = 0, iCnt = 0;
+
+    while(first != NULL)
+    {
+        iFlag = 1;
+
+        if((first->data) < 2)
+        {
+            iFlag = 0;
+        }
+        else
+        {
+            for(iCnt = 2; iCnt <= (first->data)/2; iCnt++)
+            {
+                if(((first->data) % iCnt) == 0)
+                {
+                    iFlag = 0;
+                    break;
+                }
+            }
+        }
+
+        if(iFlag == 1)
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	AddEven
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Add the Even numbers present in the linked list.
+//
+//	Returns:
+//		Returns the Addition of the even number of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyLLL<T> :: AddEven()
+{
+    int iSum = 0;
+
+    while(first != NULL)
+    {
+        if(((first->data) % 2) == 0)
+        {
+            iSum = iSum + (first->data);
+        }
+
+        first = first->next;
+    }
+    return iSum;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SecMaximum
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Find the Secmaximum element in the linked list.
+//
+//	Returns:
+//		Returns the SecMaximum of the elements present in the linked list.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+int DoublyLLL<T> :: SecMaximum()
+{
+    int iMax1 = 0, iMax2 = 0;
+
+    while(first != NULL)
+    {
+        if(iMax1 < first->data)
+        {
+            iMax2 = iMax1;
+            iMax1 = first->data;
+        }
+        else if(((first->data) > iMax2) && ((first->data) != iMax1))
+        {
+            iMax2 = first->data;
+        }
+        first = first->next;
+    }
+    return iMax2;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	SumDigit
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Sum the Digits of each element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyLLL<T> :: SumDigit()
+{
+    int iSum = 0, iDigit = 0;
+
+    while(first != NULL)
+    {
+        iSum = 0;
+
+        while((first->data) != 0)
+        {
+            iDigit = ((first->data) % 10);
+            iSum = iSum + iDigit;
+            first->data = ((first->data) /10); 
+        }
+
+        printf("%d\t",iSum);
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	Reverse
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Reverse the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyLLL<T> :: Reverse()
+{
+    int Rev = 0, iDigit = 0;
+
+    while(first != NULL)
+    {
+        Rev = 0;
+
+        while((first->data) != 0)
+        {
+            iDigit = ((first->data) % 10);
+            Rev = (Rev * 10) + ((first->data) % 10);
+            first->data = ((first->data) / 10);
+        }
+
+        printf("%d\t",Rev);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayPalindrome
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display the Palindrome elements in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyLLL<T> :: DisplayPalindrome()
+{
+    int Rev = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        Rev = 0;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            Rev = (Rev * 10) + (temp % 10);
+            temp = (temp / 10);
+        }
+
+        if(Rev == (first->data))
+        {
+            printf("%d\t",first->data);
+        }
+
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayProduct
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display the product of elements in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyLLL<T> :: DisplayProduct()
+{
+    int iMulti = 1, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMulti = 1;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+
+            if(iDigit != 0)
+            {
+                iMulti = iMulti * iDigit;
+            }
+            temp = temp / 10;
+        }
+
+        printf("%d\t",iMulti);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplaySmall
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display Small element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyLLL<T> :: DisplaySmall()
+{
+    int iMin = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMin = 9;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            if(iDigit < iMin)
+            {
+                iMin = iDigit;
+            }
+            temp = (temp / 10);
+        }
+
+        printf("%d\t",iMin);
+        first = first->next;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	Function Name			:	DisplayLargest
+//	Function Date			:	16/09/2025
+//	Function Author		    :	Sakshi Pankaj Borhade
+//	Parameters:
+//
+//		NONE
+//
+//	Description:
+//		This function is used to Display Largest element in the linked list.
+//
+//	Returns:
+//		NONE
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+void DoublyLLL<T> :: DisplayLargest()
+{
+    int iMax = 0, iDigit = 0, temp = 0;
+
+    while(first != NULL)
+    {
+        temp = first->data;
+        iMax = 0;
+
+        while(temp != 0)
+        {
+            iDigit = (temp % 10);
+            if(iDigit > iMax)
+            {
+                iMax = iDigit;
+            }
+            temp = (temp / 10);
+        }
+
+        printf("%d\t",iMax);
+        first = first->next;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
