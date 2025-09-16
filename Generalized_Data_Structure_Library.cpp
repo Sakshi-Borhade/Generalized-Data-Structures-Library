@@ -4604,8 +4604,19 @@ void DoublyLLL<T> :: DeleteAtPos(
 ////////////////////////////////////////////////////////////////////////////////////
 //
 //  class :         BST
-//  Description :   Generic implementation of Binary search tree    
+//  Description :   Generic implementation of Binary Search Tree (BST)
 //  Author  :       Sakshi Pankaj Borhade
+//  Date    :       15/09/2025
+//
+////////////////////////////////////////////////////////////////////////////////////
+
+#include <iostream>
+using namespace std;
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+//  Structure :     BSTnode
+//  Description :   Node structure for Binary Search Tree
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -4613,162 +4624,165 @@ template <class T>
 struct BSTnode
 {
     T data;
-    struct BSTnode *lchild;
-    struct BSTnode *rchild;
+    BSTnode<T>* lchild;
+    BSTnode<T>* rchild;
 };
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+//  Class :         BST
+//  Description :   Generic Binary Search Tree
+//
+////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
 class BST
 {
 private:
-    struct BSTnode * first;
+    BSTnode<T>* root;
 
     void InorderX(
-                    struct BSTnode * temp
+                    BSTnode<T>* temp
                 );
+
     void PreorderX(
-                    struct BSTnode * temp
-                );
-    void PostorderX(
-                        struct BSTnode * temp
+                        BSTnode<T>* temp
                     );
+
+    void PostorderX(
+                        BSTnode<T>* temp
+                    );
+
     bool SearchX(
-                    struct BSTnode * temp, 
+                    BSTnode<T>* temp, 
                     T no
                 );
+
     int CountX(
-                struct BSTnode * temp
-            );
+                    BSTnode<T>* temp
+                );
+
     int CountLeafNodesX(
-                            struct BSTnode * temp
+                            BSTnode<T>* temp
                         );
+
     int CountParentNodesX(
-                            struct BSTnode * temp
+                            BSTnode<T>* temp
                         );
 
 public:
     BST();
+
     void Insert(
                     T no
                 );
+
     void Inorder();
+
     void Preorder();
+
     void Postorder();
-    bool Search(    
+
+    bool Search(
                     T no
                 );
+
     int Count();
+
     int CountLeafNodes();
+
     int CountParentNodes();
 };
 
-///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 //
-//	Function Name			:	BST
-//	Function Date			:	15/09/2025
-//	Function Author			:	Sakshi Pankaj Borhade
-//	Parameters  			:   NONE
-//	Description             :   This is constructor of class BST
-//  Returns					:   NONE
+//  Function Name : BST (Constructor)
+//  Description   : Initializes the root pointer to nullptr
+//  Author        : Sakshi Pankaj Borhade
+//  Date          : 15/09/2025
 //
-///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
 BST<T>::BST()
 {
-    first = NULL;
+    root = nullptr;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 //
-//	Function Name			:	Insert
-//	Function Date			:	15/09/2025
-//	Function Author		    :	Sakshi Pankaj Borhade
-//	Parameters:
+//  Function Name : Insert
+//  Description   : Inserts a new element into the BST
+//  Author        : Sakshi Pankaj Borhade
+//  Date          : 15/09/2025
 //
-//		[IN] T no.
-//		Holds the entry which is to be added first.
-//
-//	Description:
-//		This function adds element in the Tree.
-//
-//	Returns:
-//		None
-//
-//////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
 void BST<T>::Insert(
                         T no
                     )
 {
-    struct BSTnode<T> * newn = new struct BSTnode<T>;
-    newn->data = no;
-    newn->lchild = NULL;
-    newn->rchild = NULL;
+    BSTnode<T>* newn = new BSTnode<T>{no, nullptr, nullptr};
 
-    if (first == NULL)
+    if (root == nullptr)
     {
-        first = newn;
+        root = newn;
+        return;
     }
-    else
-    {
-        struct BSTnode<T> * temp = first;
 
-        while (true)
+    BSTnode<T>* temp = root;
+    while (true)
+    {
+        if (no == temp->data)
         {
-            if (no == temp->data)
+            cout << "Duplicate element: Unable to insert node\n";
+            delete newn;
+            break;
+        }
+        else if (no < temp->data)
+        {
+            if (temp->lchild == nullptr)
             {
-                cout << "Duplicate element: Unable to insert node\n";
-                delete newn;
+                temp->lchild = newn;
                 break;
             }
-            else if (no > temp->data)
+            temp = temp->lchild;
+        }
+        else
+        {
+            if (temp->rchild == nullptr)
             {
-                if (temp->rchild == NULL)
-                {
-                    temp->rchild = newn;
-                    break;
-                }
-                temp = temp->rchild;
+                temp->rchild = newn;
+                break;
             }
-            else
-            {
-                if (temp->lchild == NULL)
-                {
-                    temp->lchild = newn;
-                    break;
-                }
-                temp = temp->lchild;
-            }
+            temp = temp->rchild;
         }
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 //
-//	Function Name			:	InorderX
-//	Function Date			:	15/09/2025
-//	Function Author		    :	Sakshi Pankaj Borhade
-//	Parameters:
+//  Function Name : Inorder
+//  Description   : Displays elements in Inorder traversal
+//  Author        : Sakshi Pankaj Borhade
+//  Date          : 15/09/2025
 //
-//		[IN] temp.
-//		Holds the address of the root node.
-//
-//	Description:
-//		This function adds element in the middle of the tree.
-//
-//	Returns:
-//		None
-//
-//////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void BST<T> :: InorderX(
-                            struct BSTnode * temp
-                        )
+void BST<T>::Inorder()
 {
-    if (temp != NULL)
+    InorderX(root);
+    cout << endl;
+}
+
+template <class T>
+void BST<T>::InorderX(
+                        BSTnode<T>* temp
+                    )
+{
+    if (temp != nullptr)
     {
         InorderX(temp->lchild);
         cout << temp->data << "\t";
@@ -4776,30 +4790,28 @@ void BST<T> :: InorderX(
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 //
-//	Function Name			:	PreorderX
-//	Function Date			:	15/09/2025
-//	Function Author		    :	Sakshi Pankaj Borhade
-//	Parameters:
+//  Function Name : Preorder
+//  Description   : Displays elements in Preorder traversal
+//  Author        : Sakshi Pankaj Borhade
+//  Date          : 15/09/2025
 //
-//		[IN] temp.
-//		Holds the address of the root node.
-//
-//	Description:
-//		This function adds element in the first of the tree.
-//
-//	Returns:
-//		None
-//
-////////////////////////////////////////////////////////////////////////////////////////// 
+////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void BST<T> ::PreorderX(
-                            struct BSTnode * temp
+void BST<T>::Preorder()
+{
+    PreorderX(root);
+    cout << endl;
+}
+
+template <class T>
+void BST<T>::PreorderX(
+                            BSTnode<T>* temp
                         )
 {
-    if (temp != NULL)
+    if (temp != nullptr)
     {
         cout << temp->data << "\t";
         PreorderX(temp->lchild);
@@ -4807,30 +4819,28 @@ void BST<T> ::PreorderX(
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 //
-//	Function Name			:	PostorderX
-//	Function Date			:	15/09/2025
-//	Function Author		    :	Sakshi Pankaj Borhade
-//	Parameters:
+//  Function Name : Postorder
+//  Description   : Displays elements in Postorder traversal
+//  Author        : Sakshi Pankaj Borhade
+//  Date          : 15/09/2025
 //
-//		[IN] temp.
-//		Holds the address of the root node.
-//
-//	Description:
-//		This function adds element in the last of the tree.
-//
-//	Returns:
-//		None
-//
-////////////////////////////////////////////////////////////////////////////////////////// 
+////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void BST<T> :: PostorderX(
-                            struct BSTnode * temp
+void BST<T>::Postorder()
+{
+    PostorderX(root);
+    cout << endl;
+}
+
+template <class T>
+void BST<T>::PostorderX(
+                            BSTnode<T>* temp
                         )
 {
-    if (temp != NULL)
+    if (temp != nullptr)
     {
         PostorderX(temp->lchild);
         PostorderX(temp->rchild);
@@ -4838,185 +4848,128 @@ void BST<T> :: PostorderX(
     }
 }
 
-// Wrapper functions
-template <class T>
-void BST<T> :: Inorder()
-{
-    InorderX(first);
-}
+////////////////////////////////////////////////////////////////////////////////////
+//
+//  Function Name : Search
+//  Description   : Searches for an element in the BST
+//  Author        : Sakshi Pankaj Borhade
+//  Date          : 15/09/2025
+//
+////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void BST<T> :: Preorder()
-{
-    PreorderX(first);
-}
-
-template <class T>
-void BST<T> :: Postorder()
-{
-    PostorderX(first);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////
-//
-//	Function Name			:	SearchX
-//	Function Date			:	15/09/2025
-//	Function Author		    :	Sakshi Pankaj Borhade
-//	Parameters:
-//
-//		[IN] temp.
-//		Holds the address of the root node.
-//      [IN] no.
-//      Holds the Number that you want to search.
-//
-//	Description:
-//		This function searches the required element from the tree.
-//
-//	Returns:
-//		None
-//
-////////////////////////////////////////////////////////////////////////////////////////// 
-
-template <class T>
-bool BST<T> :: Search(
+bool BST<T>::Search(
                         T no
                     )
 {
-    return SearchX(first, no);
+    return SearchX(root, no);
 }
 
 template <class T>
-bool BST<T> :: SearchX(
-                            struct BSTnode * temp, 
-                            T no
-                        )
+bool BST<T>::SearchX(
+                        BSTnode<T>* temp, 
+                        T no
+                    )
 {
-    int TimeComplexity = 0;
+    int steps = 0;
 
-    while (temp != NULL)
+    while (temp != nullptr)
     {
         if (no == temp->data)
         {
-            cout << "Time Complexity of search: " << TimeComplexity << endl;
+            cout << "Time Complexity of search: " << steps << endl;
             return true;
         }
-        else if (no > temp->data)
-        {
-            temp = temp->rchild;
-        }
-        else
+        else if (no < temp->data)
         {
             temp = temp->lchild;
         }
-        TimeComplexity++;
+        else
+        {
+            temp = temp->rchild;
+        }
+        steps++;
     }
 
-    cout << "Time Complexity of search: " << TimeComplexity << endl;
+    cout << "Time Complexity of search: " << steps << endl;
     return false;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 //
-//	Function Name			:	CountX
-//	Function Date			:	15/09/2025
-//	Function Author		    :	Sakshi Pankaj Borhade
-//	Parameters:
+//  Function Name : Count
+//  Description   : Returns the total number of nodes in the BST
+//  Author        : Sakshi Pankaj Borhade
+//  Date          : 15/09/2025
 //
-//		[IN] temp.
-//		Holds the address of the root node.
-//
-//	Description:
-//		This function Counts the element from the tree.
-//
-//	Returns:
-//		None
-//
-////////////////////////////////////////////////////////////////////////////////////////// 
+////////////////////////////////////////////////////////////////////////////////////
 
-// Count functions
 template <class T>
-int BST<T> :: Count()
+int BST<T>::Count()
 {
-    return CountX(first);
+    return CountX(root);
 }
 
 template <class T>
-int BST<T> :: CountX(struct BSTnode * temp)
+int BST<T>::CountX(
+                        BSTnode<T>* temp
+                    )
 {
-    if (temp == NULL) return 0;
+    if (temp == nullptr) return 0;
     return 1 + CountX(temp->lchild) + CountX(temp->rchild);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 //
-//	Function Name			:	CountLeafNodesX
-//	Function Date			:	15/09/2025
-//	Function Author		    :	Sakshi Pankaj Borhade
-//	Parameters:
+//  Function Name : CountLeafNodes
+//  Description   : Returns the number of leaf nodes in the BST
+//  Author        : Sakshi Pankaj Borhade
+//  Date          : 15/09/2025
 //
-//		[IN] temp.
-//		Holds the address of the root node.
-//
-//	Description:
-//		This function is used to count the leaf nodes from the tree. 
-//
-//	Returns:
-//		None
-//
-////////////////////////////////////////////////////////////////////////////////////////// 
+////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-int BST<T> :: CountLeafNodes()
+int BST<T>::CountLeafNodes()
 {
-    return CountLeafNodesX(first);
+    return CountLeafNodesX(root);
 }
 
 template <class T>
-int BST<T> :: CountLeafNodesX(struct BSTnode * temp)
+int BST<T>::CountLeafNodesX(BSTnode<T>* temp)
 {
-    if (temp == NULL) return 0;
-
-    if (temp->lchild == NULL && temp->rchild == NULL)
-        return 1;
+    if (temp == nullptr) return 0;
+    if (temp->lchild == nullptr && temp->rchild == nullptr) return 1;
 
     return CountLeafNodesX(temp->lchild) + CountLeafNodesX(temp->rchild);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 //
-//	Function Name			:	CountParentNodesX
-//	Function Date			:	15/09/2025
-//	Function Author		    :	Sakshi Pankaj Borhade
-//	Parameters:
+//  Function Name : CountParentNodes
+//  Description   : Returns the number of parent (non-leaf) nodes in the BST
+//  Author        : Sakshi Pankaj Borhade
+//  Date          : 15/09/2025
 //
-//		[IN] temp.
-//		Holds the address of the root node.
-//
-//	Description:
-//		This function is used to Count the Parent nodes from the tree.
-//
-//	Returns:
-//		None
-//
-////////////////////////////////////////////////////////////////////////////////////////// 
+////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-int BST<T> :: CountParentNodes()
+int BST<T>::CountParentNodes()
 {
-    return CountParentNodesX(first);
+    return CountParentNodesX(root);
 }
 
 template <class T>
-int BST<T> :: CountParentNodesX(struct BSTnode * temp)
+int BST<T>::CountParentNodesX(
+                                BSTnode<T>* temp
+                            )
 {
-    if (temp == NULL) return 0;
+    if (temp == nullptr) return 0;
 
-    if (temp->lchild != NULL || temp->rchild != NULL)
+    if (temp->lchild != nullptr || temp->rchild != nullptr)
         return 1 + CountParentNodesX(temp->lchild) + CountParentNodesX(temp->rchild);
 
     return CountParentNodesX(temp->lchild) + CountParentNodesX(temp->rchild);
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////
 //
